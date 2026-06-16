@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: multi-cloud-cicd
+  labels:
+    app.kubernetes.io/name: multi-cloud-cicd
+    app.kubernetes.io/part-of: multi-cloud-cicd
