@@ -143,3 +143,142 @@ Planned next steps include:
 - Push image to Azure ACR
 - Deploy to EKS
 - Deploy to AKS
+
+# References
+
+Official documentation links for the major tools, platforms, and services used in this project.
+
+## GitHub
+
+### GitHub Actions
+
+Official automation platform used to run validation, build, security scan, and publishing workflows from GitHub.
+
+Reference:  
+https://docs.github.com/en/actions
+
+### GitHub OIDC
+
+Official GitHub feature used to request secure temporary cloud access without storing long-term cloud keys.
+
+Reference:  
+https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect
+
+## Containerization
+
+### Docker
+
+Official container platform used to build and package applications into portable images.
+
+Reference:  
+https://docs.docker.com/
+
+## Infrastructure as Code
+
+### Terraform
+
+Official Infrastructure as Code tool used to define and manage cloud resources in repeatable configuration files.
+
+Reference:  
+https://developer.hashicorp.com/terraform/docs
+
+## AWS
+
+### Amazon ECR
+
+Official AWS container registry service used to store Docker images for AWS deployments.
+
+Reference:  
+https://docs.aws.amazon.com/ecr/
+
+### Amazon EKS
+
+Official AWS managed Kubernetes service that can run containerized applications on AWS.
+
+Reference:  
+https://docs.aws.amazon.com/eks/
+
+### AWS IAM
+
+Official AWS identity and access management service used to control permissions and cloud access.
+
+Reference:  
+https://docs.aws.amazon.com/iam/
+
+### AWS OIDC Federation
+
+Official AWS federation approach used to allow GitHub Actions to assume AWS roles with short-term credentials.
+
+Reference:  
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
+
+## Azure
+
+### Azure Container Registry (ACR)
+
+Official Azure container registry service used to store Docker images for Azure deployments.
+
+Reference:  
+https://learn.microsoft.com/en-us/azure/container-registry/
+
+### Azure Kubernetes Service (AKS)
+
+Official Azure managed Kubernetes service that can run containerized applications on Azure.
+
+Reference:  
+https://learn.microsoft.com/en-us/azure/aks/
+
+### Microsoft Entra ID (Azure AD)
+
+Official Microsoft identity platform used to manage users, applications, permissions, and cloud authentication.
+
+Reference:  
+https://learn.microsoft.com/en-us/entra/fundamentals/
+
+### Azure OIDC Federation
+
+Official Azure authentication approach used to let GitHub Actions access Azure with federated credentials.
+
+Reference:  
+https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect
+
+## Kubernetes
+
+### Kubernetes
+
+Official container orchestration platform used to define and run containerized applications.
+
+Reference:  
+https://kubernetes.io/docs/
+
+## Security
+
+### Trivy
+
+Official vulnerability scanner used to check Docker images for known security issues.
+
+Reference:  
+https://aquasecurity.github.io/trivy/
+
+## Programming
+
+### Python
+
+Official programming language used for the sample application in this project.
+
+Reference:  
+https://docs.python.org/3/
+
+# Author
+
+## James Banday
+
+Cloud | DevOps | Cybersecurity | Multi-Cloud Engineering
+
+LinkedIn:  
+https://www.linkedin.com/in/james-allen-morta-banday-62a391128/
+
+GitHub Repository:  
+https://github.com/jbanday808/multi-cloud-cicd
+
+This project demonstrates hands-on experience with GitHub Actions, Docker, Terraform, AWS, Azure, Kubernetes, security scanning, OIDC authentication, and multi-cloud CI/CD automation.
