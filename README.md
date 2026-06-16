@@ -10,7 +10,7 @@ The goal is simple: make software delivery faster, safer, and more consistent ac
 
 ## Architecture Diagram
 
-![Multi-Cloud CI/CD Pipeline](docs/images/multi-cloud-cicd-diagram.png)
+![Multi-Cloud CI/CD Pipeline](img/multi-cloud-cicd-diagram.png)
 
 Figure 1. Multi-Cloud CI/CD Pipeline architecture showing GitHub Actions, Docker, security scanning, OIDC authentication, and deployment preparation across AWS and Azure.
 
