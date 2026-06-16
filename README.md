@@ -62,9 +62,7 @@ In simple terms, the diagram shows one workflow that can prepare the same applic
 
 ![GitHub Actions Pipeline Success](img/github-actions-ecr-acr-passed.png)
 
-Figure 2. GitHub Actions successfully validated, built, and security-scanned the application.
-
-This screenshot shows the automated pipeline completing the main quality checks before cloud publishing.
+Figure 2. GitHub Actions workflow successfully validating code, building the Docker image, performing a Trivy security scan, and preparing the application for multi-cloud deployment.
 
 ### Registry Publishing Workflow Success
 
@@ -89,26 +87,6 @@ This screenshot shows the readiness review used to confirm cloud access, registr
 Figure 5. GitHub repository variables provide cloud configuration values used by the CI/CD pipeline.
 
 This screenshot shows the GitHub settings that provide non-secret configuration values to the automated workflow.
-
-## Workflow Validation
-
-![GitHub Actions Validation](img/github-actions-ecr-acr-passed.png)
-
-Figure 2. GitHub Actions workflow successfully validating code, building the Docker image, performing a Trivy security scan, and preparing the application for multi-cloud deployment.
-
-The GitHub Actions workflow runs automatically after code is pushed. The pipeline validates the application, builds a Docker image, performs a security scan, and uploads artifacts.
-
-The successful workflow execution confirms the CI pipeline is functioning correctly.
-
-## Publishing Readiness Check
-
-![Publishing Readiness Check](img/publishing-readiness-check.png)
-
-Figure 3. Publishing readiness check validating AWS OIDC, Azure identity configuration, GitHub variables, container registry requirements, and security controls before enabling automated image publishing.
-
-The readiness assessment identifies all prerequisites required before enabling automated image publishing. It validates AWS OIDC configuration, Azure federated identity requirements, GitHub Actions variables, ECR/ACR publishing requirements, and security controls.
-
-This step helps ensure secure and reliable container publishing to AWS and Azure.
 
 ## For Everyone
 
