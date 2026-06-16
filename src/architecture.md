@@ -45,6 +45,12 @@ Terraform is a tool that describes cloud infrastructure using files. Instead of 
 
 AWS is one of the cloud providers supported by this project.
 
+### AWS Infrastructure
+
+![AWS Infrastructure](../img/aws-multi-cloud-cicd-vpc.png)
+
+Figure 1. AWS VPC infrastructure deployed with Terraform for the multi-cloud platform.
+
 The AWS foundation includes:
 
 - A network foundation for future cloud deployments.
@@ -57,6 +63,12 @@ Amazon ECR stands for Elastic Container Registry. It is a secure storage locatio
 ### Azure
 
 Azure is the second cloud provider supported by this project.
+
+### Azure Infrastructure
+
+![Azure Infrastructure](../img/azure-rg-multicloud-cicd.png)
+
+Figure 2. Azure resource group and networking resources deployed with Terraform.
 
 The Azure foundation includes:
 

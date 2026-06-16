@@ -56,6 +56,40 @@ In simple terms, the diagram shows one workflow that can prepare the same applic
 7. OIDC provides secure temporary authentication without storing long-term passwords or keys.
 8. The application can be deployed to AWS and Azure.
 
+## Project Validation and Deployment Evidence
+
+### GitHub Actions Pipeline Success
+
+![GitHub Actions Pipeline Success](img/github-actions-ecr-acr-passed.png)
+
+Figure 2. GitHub Actions successfully validated, built, and security-scanned the application.
+
+This screenshot shows the automated pipeline completing the main quality checks before cloud publishing.
+
+### Registry Publishing Workflow Success
+
+![Registry Publishing Workflow Success](img/github-force-registry-publishing.png)
+
+Figure 3. GitHub Actions successfully authenticated with AWS and Azure and published container images.
+
+This screenshot shows the workflow connecting to both cloud providers and publishing the container image to their registries.
+
+### Publishing Readiness Review
+
+![Publishing Readiness Review](img/publishing-readiness-check.png)
+
+Figure 4. Registry publishing prerequisites were reviewed and validated before enabling production publishing.
+
+This screenshot shows the readiness review used to confirm cloud access, registry settings, and security controls before publishing.
+
+### GitHub Repository Variables
+
+![GitHub Repository Variables](img/multi-cloud-cicd-repository-variables.png)
+
+Figure 5. GitHub repository variables provide cloud configuration values used by the CI/CD pipeline.
+
+This screenshot shows the GitHub settings that provide non-secret configuration values to the automated workflow.
+
 ## Workflow Validation
 
 ![GitHub Actions Validation](img/github-actions-ecr-acr-passed.png)

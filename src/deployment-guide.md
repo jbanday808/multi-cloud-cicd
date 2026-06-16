@@ -97,6 +97,10 @@ This avoids storing long-term cloud keys or passwords in GitHub.
 
 ### AWS ECR Publishing
 
+![Amazon ECR Image Repository](../img/aws-ecr-container-images.png)
+
+Figure 1. Container images successfully published to Amazon ECR through GitHub Actions.
+
 For AWS, the workflow:
 
 - Logs in using GitHub OIDC.
@@ -107,6 +111,10 @@ For AWS, the workflow:
 The AWS image uses a commit-based tag so each published image can be traced back to a specific version of the code.
 
 ### Azure ACR Publishing
+
+![Azure Container Registry](../img/azure-acr-container-images.png)
+
+Figure 2. Container images successfully published to Azure Container Registry through GitHub Actions.
 
 For Azure, the workflow:
 

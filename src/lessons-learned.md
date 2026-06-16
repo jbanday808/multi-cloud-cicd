@@ -116,6 +116,24 @@ Several improvements were added during the project:
 
 These changes made the project easier to understand, easier to test, and closer to a real-world multi-cloud delivery process.
 
+## Key Deployment Lessons
+
+![Publishing Readiness Check](../img/publishing-readiness-check.png)
+
+Figure 1. Publishing readiness review used to confirm cloud access, registry settings, and security controls before enabling image publishing.
+
+One of the biggest lessons was that successful deployment depends on more than a working application. The supporting cloud access, repository settings, and permissions must also be correct.
+
+Important deployment lessons included:
+
+- **OIDC configuration matters:** GitHub Actions needs trusted access to AWS and Azure before it can publish images securely.
+- **Repository variables must be accurate:** Cloud account IDs, registry names, regions, and identity values must match the real AWS and Azure resources.
+- **Permissions must match the task:** AWS IAM permissions and Azure `AcrPush` access should allow image publishing without giving broad administrator access.
+- **Infrastructure should be validated first:** Terraform-managed resources should be reviewed before depending on them in the workflow.
+- **Security scanning adds confidence:** Automated Trivy scanning helps catch known image issues before publishing to ECR or ACR.
+
+This readiness step made the publishing process safer because it confirmed the required pieces before treating the pipeline as production-ready.
+
 ## Skills Gained
 
 This project helped build practical experience in:

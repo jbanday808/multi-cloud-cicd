@@ -10,6 +10,16 @@ The project focuses on secure access, container scanning, controlled permissions
 
 Identity and access management controls who can access cloud resources and what they are allowed to do.
 
+## Secure Authentication with OIDC
+
+![Secure Authentication with OIDC](../img/registered-github-actions-multi-cloud-cicd.png)
+
+Figure 1. GitHub Actions OIDC federation configured for secure cloud authentication without long-term credentials.
+
+OIDC helps the project connect GitHub Actions to AWS and Azure without hardcoded passwords. Instead of saving permanent cloud keys in the repository, the workflow requests temporary cloud credentials only when it runs.
+
+This reduces security risk because there are no long-term cloud passwords to leak from the codebase. It also supports both AWS and Azure authentication, which keeps the multi-cloud pipeline safer and easier to manage.
+
 ### GitHub OIDC Authentication
 
 GitHub OIDC allows GitHub Actions to connect to AWS and Azure without storing permanent cloud passwords in GitHub.
