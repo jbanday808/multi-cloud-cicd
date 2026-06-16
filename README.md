@@ -56,6 +56,26 @@ In simple terms, the diagram shows one workflow that can prepare the same applic
 7. OIDC provides secure temporary authentication without storing long-term passwords or keys.
 8. The application can be deployed to AWS and Azure.
 
+## Workflow Validation
+
+![GitHub Actions Validation](img/github-actions-ecr-acr-passed.png)
+
+Figure 2. GitHub Actions workflow successfully validating code, building the Docker image, performing a Trivy security scan, and preparing the application for multi-cloud deployment.
+
+The GitHub Actions workflow runs automatically after code is pushed. The pipeline validates the application, builds a Docker image, performs a security scan, and uploads artifacts.
+
+The successful workflow execution confirms the CI pipeline is functioning correctly.
+
+## Publishing Readiness Check
+
+![Publishing Readiness Check](img/publishing-readiness-check.png)
+
+Figure 3. Publishing readiness check validating AWS OIDC, Azure identity configuration, GitHub variables, container registry requirements, and security controls before enabling automated image publishing.
+
+The readiness assessment identifies all prerequisites required before enabling automated image publishing. It validates AWS OIDC configuration, Azure federated identity requirements, GitHub Actions variables, ECR/ACR publishing requirements, and security controls.
+
+This step helps ensure secure and reliable container publishing to AWS and Azure.
+
 ## For Everyone
 
 You write code once, push it to GitHub, and the system automatically checks it, packages it, scans it for security problems, and prepares it for deployment to AWS and Azure.
@@ -108,6 +128,10 @@ The project currently includes:
 - Kubernetes manifests
 - AWS Terraform foundation
 - Azure Terraform foundation
+- GitHub OIDC authentication foundation
+- AWS ECR publishing workflow
+- Azure ACR publishing workflow
+- Publishing readiness validation
 
 ## Future Roadmap
 
