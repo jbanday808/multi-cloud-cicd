@@ -48,24 +48,24 @@ jobs:
           ignore-unfixed: true
 
       - name: Configure AWS credentials with OIDC
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ vars.AWS_GITHUB_ACTIONS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Push image to Amazon ECR
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         run: |
           docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AWS_ECR_REPOSITORY_URL }}:${{ github.sha }}
           docker push ${{ vars.AWS_ECR_REPOSITORY_URL }}:${{ github.sha }}
 
       - name: Login to Azure with OIDC
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         uses: azure/login@v2
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
@@ -73,11 +73,11 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - name: Login to Azure Container Registry
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
 
       - name: Push image to Azure ACR
-        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        if: ${{ github.event_name == 'push' }}
         run: |
           docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:${{ github.sha }}
           docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:latest
