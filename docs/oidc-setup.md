@@ -10,12 +10,15 @@ No deployment is enabled yet. These steps prepare the authentication foundation 
 
 Add these repository variables before enabling cloud login steps:
 
-- `ENABLE_CLOUD_OIDC_LOGIN`: set to `true` only after AWS and Azure cloud-side setup is complete.
+- `ENABLE_CONTAINER_REGISTRY_PUBLISH`: set to `true` only after AWS and Azure cloud-side setup is complete.
 - `AWS_GITHUB_ACTIONS_ROLE_ARN`: AWS IAM role ARN output by Terraform.
 - `AWS_REGION`: AWS region, such as `us-east-1`.
+- `AWS_ECR_REPOSITORY_URL`: AWS ECR repository URL output by Terraform.
 - `AZURE_CLIENT_ID`: Azure application or managed identity client ID.
 - `AZURE_TENANT_ID`: Azure tenant ID.
 - `AZURE_SUBSCRIPTION_ID`: Azure subscription ID.
+- `AZURE_ACR_NAME`: Azure Container Registry name output by Terraform.
+- `AZURE_ACR_LOGIN_SERVER`: Azure Container Registry login server output by Terraform.
 
 The workflow already includes `id-token: write`, which allows GitHub Actions to request an OIDC token. This does not grant cloud access by itself; AWS and Azure must be configured to trust the repository.
 
@@ -42,7 +45,7 @@ github_oidc_subject_claims = [
 
 For this repository, replace `OWNER/REPO` with the actual GitHub owner and repository name.
 
-The AWS role currently has no permissions attached. After the deployment design is finalized, attach only the permissions needed for the next step, such as pushing to Amazon ECR or deploying to EKS.
+The AWS role includes least-privilege permissions for publishing images to the project ECR repository. It does not include EKS deployment permissions.
 
 ## Azure Setup
 
@@ -56,7 +59,7 @@ Before enabling Azure login:
    - Issuer: `https://token.actions.githubusercontent.com`
    - Subject: `repo:OWNER/REPO:ref:refs/heads/main`
    - Audience: `api://AzureADTokenExchange`
-4. Grant the identity only the Azure roles it needs, such as ACR push or AKS deployment permissions.
+4. Grant the identity only the Azure roles it needs, such as `AcrPush` for container registry publishing.
 5. Add the identity details to GitHub repository variables.
 
 ## Workflow Behavior
@@ -66,10 +69,10 @@ The GitHub Actions workflow contains AWS and Azure OIDC login placeholders.
 These steps only run when:
 
 ```text
-ENABLE_CLOUD_OIDC_LOGIN=true
+ENABLE_CONTAINER_REGISTRY_PUBLISH=true
 ```
 
-Until then, the workflow continues to validate Python, build the Docker image, scan it with Trivy, and upload scan results without logging in to either cloud.
+Until then, the workflow continues to validate Python, build the Docker image, scan it with Trivy, and upload scan results without logging in to either cloud or pushing images.
 
 ## References
 

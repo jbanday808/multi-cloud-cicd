@@ -54,6 +54,39 @@ resource "aws_iam_role" "github_actions" {
   }
 }
 
-# No permissions are attached yet. Add least-privilege policies later for ECR,
-# EKS, Terraform plan/apply, or other deployment tasks after the deployment
-# workflow is designed.
+data "aws_iam_policy_document" "github_actions_ecr_publish" {
+  statement {
+    sid    = "AllowEcrAuthorization"
+    effect = "Allow"
+
+    actions = [
+      "ecr:GetAuthorizationToken"
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "AllowEcrImagePublish"
+    effect = "Allow"
+
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:DescribeRepositories",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart"
+    ]
+
+    resources = [
+      aws_ecr_repository.main.arn
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "github_actions_ecr_publish" {
+  name   = "${var.project_name}-github-actions-ecr-publish"
+  role   = aws_iam_role.github_actions.id
+  policy = data.aws_iam_policy_document.github_actions_ecr_publish.json
+}

@@ -18,6 +18,10 @@ output "ecr_repository_url" {
   value = aws_ecr_repository.main.repository_url
 }
 
+output "ecr_repository_name" {
+  value = aws_ecr_repository.main.name
+}
+
 output "vpc_flow_log_id" {
   value = aws_flow_log.main.id
 }

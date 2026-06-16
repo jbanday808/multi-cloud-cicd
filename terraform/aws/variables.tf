@@ -55,7 +55,7 @@ variable "flow_log_retention_days" {
 variable "github_oidc_subject_claims" {
   description = "GitHub OIDC subject claims allowed to assume the AWS GitHub Actions role. Replace the placeholder with repo:OWNER/REPO:ref:refs/heads/main or another approved subject."
   type        = list(string)
-  default     = ["repo:OWNER/REPO:ref:refs/heads/main"]
+  default     = ["repo:jbanday808/multi-cloud-cicd:ref:refs/heads/main"]
 }
 
 variable "github_oidc_thumbprint_list" {

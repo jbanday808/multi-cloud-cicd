@@ -35,7 +35,7 @@ jobs:
         run: python -m compileall app scripts
 
       - name: Build Docker image
-        run: docker build -t multi-cloud-cicd:${{ github.sha }} .
+        run: docker build -t multi-cloud-cicd:${{ github.sha }} -t multi-cloud-cicd:latest .
 
       - name: Run Trivy image scan
         uses: aquasecurity/trivy-action@v0.36.0
@@ -47,20 +47,42 @@ jobs:
           exit-code: "1"
           ignore-unfixed: true
 
-      - name: AWS OIDC login placeholder
-        if: ${{ vars.ENABLE_CLOUD_OIDC_LOGIN == 'true' }}
+      - name: Configure AWS credentials with OIDC
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ vars.AWS_GITHUB_ACTIONS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Azure OIDC login placeholder
-        if: ${{ vars.ENABLE_CLOUD_OIDC_LOGIN == 'true' }}
+      - name: Login to Amazon ECR
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push image to Amazon ECR
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        run: |
+          docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AWS_ECR_REPOSITORY_URL }}:${{ github.sha }}
+          docker push ${{ vars.AWS_ECR_REPOSITORY_URL }}:${{ github.sha }}
+
+      - name: Login to Azure with OIDC
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
         uses: azure/login@v2
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Login to Azure Container Registry
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
+
+      - name: Push image to Azure ACR
+        if: ${{ github.event_name == 'push' && vars.ENABLE_CONTAINER_REGISTRY_PUBLISH == 'true' }}
+        run: |
+          docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:${{ github.sha }}
+          docker tag multi-cloud-cicd:${{ github.sha }} ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:latest
+          docker push ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:${{ github.sha }}
+          docker push ${{ vars.AZURE_ACR_LOGIN_SERVER }}/multi-cloud-cicd:latest
 
       - name: Upload Trivy scan results
         if: always()
